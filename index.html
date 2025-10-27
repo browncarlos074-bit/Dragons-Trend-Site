@@ -1,0 +1,186 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Dragons Trend | Vote. Rise. Trend.</title>
+  <link rel="icon" type="image/png" href="https://i.ibb.co/nPtLVq8/dragons-icon-green.png" />
+  <script src="https://cdn.tailwindcss.com"></script>
+  <style>
+    body {
+      margin: 0;
+      padding: 0;
+      background: #000;
+      color: white;
+      font-family: 'Poppins', sans-serif;
+      overflow-x: hidden;
+    }
+
+    /* Loader */
+    #loader {
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      background: radial-gradient(circle, #001100, #000);
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      z-index: 9999;
+      flex-direction: column;
+      animation: fadeOut 1s ease forwards;
+      animation-delay: 2.5s;
+    }
+    #loader img {
+      width: 100px;
+      filter: drop-shadow(0 0 20px #00ff66);
+      animation: pulse 1.5s infinite;
+    }
+    #loader p {
+      margin-top: 10px;
+      color: #00ff66;
+      font-weight: 600;
+      text-shadow: 0 0 10px #00ff66;
+    }
+
+    @keyframes pulse {
+      0%, 100% { transform: scale(1); opacity: 1; }
+      50% { transform: scale(1.1); opacity: 0.7; }
+    }
+
+    @keyframes fadeOut {
+      to { opacity: 0; visibility: hidden; }
+    }
+
+    /* Background Dragon */
+    body::before {
+      content: "";
+      position: fixed;
+      top: 0; left: 0;
+      width: 100%;
+      height: 100%;
+      background: url('https://i.ibb.co/1KGHxsw/dragon-shadow-bg.jpg') center/cover no-repeat;
+      opacity: 0.25;
+      z-index: -3;
+    }
+
+    /* Sparks */
+    .spark {
+      position: fixed;
+      width: 4px;
+      height: 4px;
+      background: #00ff66;
+      border-radius: 50%;
+      animation: fly 6s linear infinite;
+      opacity: 0.8;
+      z-index: -2;
+    }
+    @keyframes fly {
+      0% { transform: translateY(100vh) scale(1); opacity: 0.8; }
+      100% { transform: translateY(-10vh) scale(0.5); opacity: 0; }
+    }
+
+    .glow-text {
+      text-shadow: 0 0 8px #00ff66, 0 0 16px #00ff66;
+    }
+    .glow-border {
+      box-shadow: 0 0 15px #00ff66, inset 0 0 10px #00ff66;
+    }
+  </style>
+</head>
+
+<body>
+
+  <!-- Loader -->
+  <div id="loader">
+    <img src="https://i.ibb.co/nPtLVq8/dragons-icon-green.png" alt="Dragon Icon">
+    <p>Loading Dragons Trend...</p>
+  </div>
+
+  <!-- Sparks Background Generator -->
+  <script>
+    for (let i = 0; i < 50; i++) {
+      const spark = document.createElement('div');
+      spark.classList.add('spark');
+      spark.style.left = Math.random() * 100 + 'vw';
+      spark.style.animationDuration = 4 + Math.random() * 6 + 's';
+      spark.style.animationDelay = Math.random() * 5 + 's';
+      document.body.appendChild(spark);
+    }
+  </script>
+
+  <!-- Main Content -->
+  <header class="fixed w-full top-0 left-0 bg-black/70 border-b border-green-500 backdrop-blur-md z-50">
+    <div class="flex justify-between items-center px-6 py-3">
+      <h1 class="text-2xl font-bold text-green-400 glow-text flex items-center space-x-2">
+        <img src="https://i.ibb.co/nPtLVq8/dragons-icon-green.png" class="w-8 h-8" />
+        <span>Dragons Trend</span>
+      </h1>
+      <nav class="space-x-4 text-gray-300">
+        <a href="#home" class="hover:text-green-400">Home</a>
+        <a href="#leaderboard" class="hover:text-green-400">Leaderboard</a>
+        <a href="#whitepaper" class="hover:text-green-400">Whitepaper</a>
+        <a href="#contact" class="hover:text-green-400">Contact</a>
+      </nav>
+    </div>
+  </header>
+
+  <section id="home" class="min-h-screen flex flex-col justify-center items-center text-center">
+    <img src="https://i.ibb.co/84mj834q/20251026-061522.jpg" class="w-40 md:w-56 rounded-2xl glow-border" />
+    <h2 class="text-5xl md:text-6xl font-extrabold mt-8 glow-text">Vote. Rise. Trend.</h2>
+    <p class="text-gray-300 mt-4 max-w-md">Join the most powerful crypto voting arena — where real dragons trend.</p>
+    <div class="mt-8 space-x-4">
+      <a href="https://t.me/dragonstrending" target="_blank" class="bg-green-500 text-black px-6 py-3 rounded-xl font-semibold hover:bg-green-400 transition glow-border">Join Telegram</a>
+      <a href="#leaderboard" class="border border-green-400 px-6 py-3 rounded-xl hover:bg-green-500 hover:text-black transition">View Leaderboard</a>
+    </div>
+  </section>
+
+  <section id="leaderboard" class="py-20 bg-black/50">
+    <h3 class="text-3xl font-bold text-center text-green-400 glow-text mb-8">🔥 Live Leaderboard</h3>
+    <div class="max-w-3xl mx-auto bg-gray-800/60 p-6 rounded-2xl glow-border">
+      <ul id="leaderboard-list" class="space-y-4 text-lg">
+        <li class="flex justify-between border-b border-gray-700 pb-2"><span class="glow-text">1️⃣ Bitmart Coin ($BMC)</span><span class="text-green-400 vote">532</span></li>
+        <li class="flex justify-between border-b border-gray-700 pb-2"><span class="glow-text">2️⃣ SolFi ($SOLF)</span><span class="text-green-400 vote">498</span></li>
+        <li class="flex justify-between border-b border-gray-700 pb-2"><span class="glow-text">3️⃣ DragonX ($DRGX)</span><span class="text-green-400 vote">420</span></li>
+      </ul>
+    </div>
+  </section>
+
+  <section id="whitepaper" class="py-20 bg-gray-900/40 text-center">
+    <h3 class="text-3xl font-bold text-green-400 glow-text mb-8">📜 Whitepaper</h3>
+    <div class="max-w-3xl mx-auto text-gray-300 leading-relaxed text-lg space-y-6">
+      <p><span class="text-green-400 font-semibold">Dragons Trend</span> is a decentralized ranking and discovery platform built for the modern crypto community. Our mission is to empower transparency, authenticity, and engagement in the Web3 world.</p>
+      <p>Every project listed on Dragons Trend battles for visibility through community-driven votes. We believe that genuine hype should come from real supporters, not bots or manipulation.</p>
+      <p><span class="text-green-400 font-semibold">The DRGN Token</span> will power governance, premium listings, and verified partnerships.</p>
+    </div>
+  </section>
+
+  <section id="contact" class="py-16 text-center bg-gray-900/60">
+    <h3 class="text-3xl font-bold text-green-400 glow-text mb-6">Connect With Us</h3>
+    <div class="flex justify-center flex-wrap gap-6">
+      <a href="https://t.me/dragonstrending" target="_blank" class="bg-green-500 text-black px-5 py-2 rounded-xl glow-border hover:bg-green-400 transition">📢 Telegram Channel</a>
+      <a href="https://t.me/Dragonstrend" target="_blank" class="bg-green-500 text-black px-5 py-2 rounded-xl glow-border hover:bg-green-400 transition">💬 Telegram Lounge</a>
+      <a href="https://discord.gg/KRJeBMS9nx" target="_blank" class="bg-green-500 text-black px-5 py-2 rounded-xl glow-border hover:bg-green-400 transition">🕹 Discord</a>
+      <a href="https://x.com/Dragonstrend" target="_blank" class="bg-green-500 text-black px-5 py-2 rounded-xl glow-border hover:bg-green-400 transition">🐦 X (Twitter)</a>
+      <a href="https://t.me/Dragonstrend_bot" target="_blank" class="bg-green-500 text-black px-5 py-2 rounded-xl glow-border hover:bg-green-400 transition">🤖 DRGN Bot</a>
+      <a href="https://linktr.ee/dragonstrend" target="_blank" class="bg-green-500 text-black px-5 py-2 rounded-xl glow-border hover:bg-green-400 transition">🌐 Linktree</a>
+    </div>
+  </section>
+
+  <footer class="text-center py-4 border-t border-green-500 text-gray-400 text-sm">
+    © 2025 Dragons Trend — Powered by DRGN Bot 🐉
+  </footer>
+
+  <script>
+    // Mock vote update
+    const votes = document.querySelectorAll('.vote');
+    setInterval(() => {
+      votes.forEach(v => {
+        const val = parseInt(v.textContent);
+        v.textContent = val + Math.floor(Math.random() * 3);
+      });
+    }, 2000);
+  </script>
+</body>
+</html>
