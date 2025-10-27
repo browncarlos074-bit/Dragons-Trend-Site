@@ -1,0 +1,104 @@
+/* Reset & basic styles */
+* { margin: 0; padding: 0; box-sizing: border-box; }
+body {
+  font-family: 'Poppins', sans-serif;
+  background: linear-gradient(135deg, #000000, #0f0f0f);
+  color: #00ff66;
+  overflow-x: hidden;
+}
+a { text-decoration: none; }
+
+/* Loader */
+#loader {
+  position: fixed;
+  width: 100%;
+  height: 100%;
+  background: #000;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  z-index: 9999;
+}
+.spinner {
+  border: 6px solid #00ff66;
+  border-top: 6px solid transparent;
+  border-radius: 50%;
+  width: 80px;
+  height: 80px;
+  animation: spin 1s linear infinite;
+}
+@keyframes spin { 100% { transform: rotate(360deg); } }
+#loader p { margin-top: 20px; font-size: 18px; text-shadow: 0 0 10px #00ff66; }
+
+/* Main content hidden initially */
+#content { display: none; }
+
+/* Hero Section */
+#hero {
+  height: 100vh;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  text-align: center;
+  background: url('https://i.ibb.co/84mj834q/20251026-061522.jpg') center/cover no-repeat;
+}
+#hero h1 {
+  font-size: 64px;
+  text-shadow: 0 0 20px #00ff66, 0 0 40px #00ff66;
+}
+#hero .slogan {
+  font-size: 24px;
+  margin: 20px 0 40px;
+  text-shadow: 0 0 10px #00ff66;
+}
+#hero .buttons { display: flex; flex-wrap: wrap; justify-content: center; gap: 15px; }
+.btn {
+  padding: 12px 25px;
+  border: 2px solid #00ff66;
+  border-radius: 8px;
+  color: #00ff66;
+  font-weight: 600;
+  transition: all 0.3s ease;
+}
+.btn:hover {
+  background: #00ff66;
+  color: #000;
+  box-shadow: 0 0 20px #00ff66, 0 0 40px #00ff66;
+}
+
+/* Leaderboard Section */
+#leaderboard {
+  padding: 60px 20px;
+  text-align: center;
+}
+#leaderboard h2 {
+  font-size: 36px;
+  margin-bottom: 30px;
+  text-shadow: 0 0 15px #00ff66;
+}
+#leaderboard ul { list-style: none; }
+#leaderboard li {
+  font-size: 22px;
+  margin: 10px 0;
+  text-shadow: 0 0 5px #00ff66;
+}
+
+/* About Section */
+#about {
+  padding: 60px 20px;
+  text-align: center;
+}
+#about h2 { font-size: 36px; margin-bottom: 20px; text-shadow: 0 0 10px #00ff66; }
+#about p { font-size: 20px; line-height: 1.6; max-width: 800px; margin: auto; }
+
+/* Particle Background (Canvas overlay) */
+#particles-js { position: fixed; width: 100%; height: 100%; top: 0; left: 0; z-index: -1; }
+
+/* Responsive */
+@media(max-width:768px){
+  #hero h1 { font-size: 48px; }
+  #hero .slogan { font-size: 20px; }
+  .btn { padding: 10px 20px; font-size: 14px; }
+}
