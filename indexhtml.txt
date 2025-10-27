@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Dragons Trend | Vote. Rise. Trend.</title>
+<style>
+  body {
+    background-color: black;
+    color: #00ff66;
+    font-family: Arial, sans-serif;
+    text-align: center;
+    padding-top: 100px;
+  }
+  h1 {
+    font-size: 48px;
+    text-shadow: 0 0 10px #00ff66, 0 0 20px #00ff66;
+  }
+  p {
+    font-size: 24px;
+    margin-top: 20px;
+  }
+</style>
+</head>
+<body>
+<h1>🐉 Dragons Trend</h1>
+<p>Vote. Rise. Trend</p>
+</body>
+</html>
