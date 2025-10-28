@@ -1,0 +1,340 @@
+<!doctype html>
+
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width,initial-scale=1" />
+  <title>Dragons Trend — Recent Listings</title>
+  <script src="https://cdn.tailwindcss.com"></script>
+  <style>
+    /* small custom tweaks on top of Tailwind */
+    .glass { background: linear-gradient(180deg, rgba(255,255,255,0.02), rgba(255,255,255,0.01)); }
+    .muted { color: theme('colors.slate.400'); }
+    .card-hover:hover { transform: translateY(-4px); box-shadow: 0 10px 30px rgba(2,6,23,0.6); }
+    /* responsive table horizontal scroll shadow */
+    .table-wrap { -webkit-overflow-scrolling: touch; }
+  </style>
+</head>
+<body class="min-h-screen bg-gradient-to-b from-slate-950 to-slate-900 text-white font-sans">
+  <!-- Header -->
+  <header class="py-6 px-4 md:px-8 bg-gradient-to-r from-slate-900 to-slate-800">
+    <div class="max-w-7xl mx-auto flex items-center justify-between">
+      <div class="flex items-center gap-4">
+        <div class="w-10 h-10 rounded-lg bg-white/10 flex items-center justify-center text-xl font-bold">DT</div>
+        <div>
+          <div class="text-lg font-semibold">Dragons Trend</div>
+          <div class="text-xs text-slate-300">Latest token listings, live analytics & community</div>
+        </div>
+      </div>
+      <nav class="hidden md:flex gap-4 items-center">
+        <a class="text-slate-300 hover:text-white" href="#">Recent</a>
+        <a class="text-slate-300 hover:text-white" href="#">Top</a>
+        <a class="text-slate-300 hover:text-white" href="#">Verified</a>
+        <button id="submitBtn" class="bg-emerald-500 px-3 py-1 rounded text-sm">Submit a project</button>
+      </nav>
+    </div>
+  </header>  <main class="max-w-7xl mx-auto p-4 md:p-8">
+    <!-- Controls -->
+    <div class="mb-6 flex flex-col md:flex-row gap-4 md:items-center md:justify-between">
+      <div class="flex-1">
+        <div class="flex gap-3 items-center">
+          <input id="search" type="search" placeholder="Search by name or symbol, e.g. DRGN..." class="w-full rounded border border-slate-700 p-3 bg-transparent placeholder:s text-slate-300" />
+          <button id="searchBtn" class="px-4 py-2 rounded bg-slate-700 hover:bg-slate-600">Search</button>
+        </div>
+      </div><div class="md:ml-6 flex gap-3 items-center">
+    <select id="chainFilter" class="rounded p-2 bg-white/3 border border-slate-700">
+      <option value="all">All chains</option>
+      <option value="ETH">Ethereum</option>
+      <option value="BSC">BSC</option>
+    </select>
+
+    <select id="sortSelect" class="rounded p-2 bg-white/3 border border-slate-700">
+      <option value="listedAt_desc">Newest</option>
+      <option value="marketCap_desc">Market Cap ↓</option>
+      <option value="marketCap_asc">Market Cap ↑</option>
+      <option value="price_desc">Price ↓</option>
+      <option value="price_asc">Price ↑</option>
+    </select>
+
+    <div class="flex items-center gap-2">
+      <button id="viewTable" class="px-3 py-1 rounded bg-slate-700">Table</button>
+      <button id="viewCards" class="px-3 py-1 rounded bg-white/5">Cards</button>
+    </div>
+  </div>
+</div>
+
+<!-- Meta row -->
+<div class="mb-4 flex items-center justify-between">
+  <div class="text-sm text-slate-300">Showing <span id="showingCount" class="font-semibold">0</span> of <span id="totalCount" class="font-semibold">0</span> projects</div>
+  <div class="flex items-center gap-3">
+    <div class="text-sm">Per page:</div>
+    <select id="perPage" class="rounded p-1 bg-white/3 border border-slate-700">
+      <option value="6">6</option>
+      <option value="12" selected>12</option>
+      <option value="24">24</option>
+    </select>
+  </div>
+</div>
+
+<!-- List area -->
+<section>
+  <div id="listContainer">
+    <!-- Table view (hidden/shown by JS) -->
+    <div id="tableView" class="table-wrap overflow-x-auto rounded-lg border border-slate-800">
+      <table class="w-full table-fixed text-sm">
+        <thead class="text-left text-slate-300 bg-white/2">
+          <tr>
+            <th class="p-3 w-12">#</th>
+            <th class="p-3">Project</th>
+            <th class="p-3 w-28">Price</th>
+            <th class="p-3 w-24">24h</th>
+            <th class="p-3 w-36">Market Cap</th>
+            <th class="p-3 w-36">Holders</th>
+            <th class="p-3 w-40">Links</th>
+          </tr>
+        </thead>
+        <tbody id="tableBody"></tbody>
+      </table>
+    </div>
+
+    <!-- Card view -->
+    <div id="cardView" class="hidden grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4"></div>
+  </div>
+</section>
+
+<!-- Pagination + updated -->
+<div class="mt-6 flex items-center justify-between">
+  <div id="pagination" class="flex gap-2 items-center"></div>
+  <div class="text-sm text-slate-400">Updated: <span id="updatedAt" class="font-mono"></span></div>
+</div>
+
+  </main>  <footer class="mt-10 py-6 text-center text-slate-400">© <span id="year"></span> Dragons Trend — Replace mock API with your backend to fetch live data.</footer>  <script>
+    /* -------------------- Mock data -------------------- */
+    const MOCK_PROJECTS = Array.from({ length: 48 }).map((_, i) => {
+      const id = i + 1;
+      const now = new Date();
+      now.setMinutes(now.getMinutes() - i * 13);
+      return {
+        id,
+        name: `DragonToken ${id}`,
+        symbol: `DRGN${id}`,
+        marketCap: Math.round(Math.random() * 5_000_000),
+        price: (Math.random() * 0.5).toFixed(6),
+        change24h: (Math.random() * 20 - 10).toFixed(2),
+        holders: Math.floor(Math.random() * 80_000),
+        liquidityUSD: Math.round(Math.random() * 200_000),
+        listedAt: now.toISOString(),
+        website: `https://dragontoken${id}.xyz`,
+        telegram: `https://t.me/dragontoken${id}`,
+        verified: Math.random() > 0.6,
+        chain: Math.random() > 0.5 ? 'ETH' : 'BSC',
+      };
+    });
+
+    /* -------------------- State -------------------- */
+    let state = {
+      q: '',
+      chain: 'all',
+      sort: 'listedAt_desc',
+      view: 'table',
+      page: 1,
+      perPage: 12,
+    };
+
+    /* -------------------- Utilities -------------------- */
+    function $(sel) { return document.querySelector(sel); }
+    function $all(sel) { return Array.from(document.querySelectorAll(sel)); }
+
+    function formatNumber(n) {
+      return Number(n).toLocaleString();
+    }
+
+    function formatPrice(p) {
+      const num = Number(p);
+      if (num >= 1) return num.toLocaleString(undefined, { maximumFractionDigits: 2 });
+      return num.toLocaleString(undefined, { maximumFractionDigits: 6 });
+    }
+
+    /* -------------------- Data fetch (mock) -------------------- */
+    function fetchProjects() {
+      // filter, sort, paginate in-memory (replace with real API later)
+      let items = MOCK_PROJECTS.slice();
+
+      if (state.q) {
+        const ql = state.q.toLowerCase();
+        items = items.filter(p => p.name.toLowerCase().includes(ql) || p.symbol.toLowerCase().includes(ql));
+      }
+
+      if (state.chain !== 'all') items = items.filter(p => p.chain === state.chain);
+
+      const [field, dir] = state.sort.split('_');
+      items.sort((a, b) => {
+        let va = a[field];
+        let vb = b[field];
+        if (!isNaN(Number(va)) && !isNaN(Number(vb))) { va = Number(va); vb = Number(vb); }
+        if (va < vb) return dir === 'asc' ? -1 : 1;
+        if (va > vb) return dir === 'asc' ? 1 : -1;
+        return 0;
+      });
+
+      const total = items.length;
+      const start = (state.page - 1) * state.perPage;
+      const paged = items.slice(start, start + state.perPage);
+      return Promise.resolve({ data: paged, total });
+    }
+
+    /* -------------------- Renderers -------------------- */
+    function renderTable(projects) {
+      const tbody = $('#tableBody');
+      tbody.innerHTML = '';
+      projects.forEach(p => {
+        const tr = document.createElement('tr');
+        tr.className = 'border-b border-slate-700 hover:bg-white/2';
+        tr.innerHTML = `
+          <td class="p-3">${p.id}</td>
+          <td class="p-3">
+            <div class="flex items-center gap-3">
+              <div class="w-10 h-10 rounded bg-white/5 flex items-center justify-center">${p.name[0]}</div>
+              <div>
+                <div class="font-semibold">${p.name} ${p.verified ? '<span title="verified" class="text-emerald-400 ml-1 inline-flex items-center text-sm">✔</span>' : ''}</div>
+                <div class="text-xs text-slate-400">${p.symbol} • ${p.chain}</div>
+              </div>
+            </div>
+          </td>
+          <td class="p-3">$${formatPrice(p.price)}</td>
+          <td class="p-3 ${p.change24h > 0 ? 'text-emerald-400' : 'text-red-400'}">${p.change24h}%</td>
+          <td class="p-3">$${formatNumber(p.marketCap)}</td>
+          <td class="p-3">${formatNumber(p.holders)}</td>
+          <td class="p-3">
+            <div class="flex gap-2">
+              <a class="text-xs bg-white/5 px-2 py-1 rounded" href="${p.website}" target="_blank" rel="noreferrer">Site</a>
+              <a class="text-xs bg-white/5 px-2 py-1 rounded" href="${p.telegram}" target="_blank" rel="noreferrer">TG</a>
+            </div>
+          </td>
+        `;
+        tbody.appendChild(tr);
+      });
+    }
+
+    function renderCards(projects) {
+      const container = $('#cardView');
+      container.innerHTML = '';
+      projects.forEach(p => {
+        const div = document.createElement('div');
+        div.className = 'bg-white/3 rounded-lg p-4 border border-slate-700 card-hover transition-transform';
+        div.innerHTML = `
+          <div class="flex items-start gap-3">
+            <div class="w-12 h-12 rounded bg-white/5 flex items-center justify-center text-lg font-bold">${p.symbol}</div>
+            <div class="flex-1">
+              <div class="flex justify-between items-center">
+                <div>
+                  <div class="font-semibold">${p.name} ${p.verified ? '<span class="text-emerald-400">✔</span>' : ''}</div>
+                  <div class="text-xs text-slate-300">${p.symbol} • ${p.chain}</div>
+                </div>
+                <div class="text-right">
+                  <div class="text-sm">$${formatPrice(p.price)}</div>
+                  <div class="text-xs ${p.change24h > 0 ? 'text-emerald-400' : 'text-red-400'}">${p.change24h}%</div>
+                </div>
+              </div>
+              <div class="mt-3 flex gap-2 text-xs">
+                <a href="${p.website}" target="_blank" rel="noreferrer" class="px-2 py-1 bg-white/5 rounded">Website</a>
+                <a href="${p.telegram}" target="_blank" rel="noreferrer" class="px-2 py-1 bg-white/5 rounded">Telegram</a>
+                <div class="ml-auto text-xs text-slate-300">Holders: ${formatNumber(p.holders)}</div>
+              </div>
+            </div>
+          </div>
+        `;
+        container.appendChild(div);
+      });
+    }
+
+    /* -------------------- Pagination UI -------------------- */
+    function renderPagination(page, totalPages) {
+      const cont = $('#pagination');
+      cont.innerHTML = '';
+
+      const addBtn = (label, disabled, onClick, extraClass = '') => {
+        const b = document.createElement('button');
+        b.className = `px-2 py-1 rounded ${disabled ? 'opacity-40 cursor-not-allowed' : 'bg-white/5 hover:bg-white/8'} ${extraClass}`;
+        b.innerText = label;
+        if (!disabled) b.addEventListener('click', onClick);
+        cont.appendChild(b);
+      };
+
+      addBtn('First', page === 1, () => { state.page = 1; load(); });
+      addBtn('Prev', page === 1, () => { state.page = Math.max(1, page -1); load(); });
+
+      // pages window
+      const start = Math.max(1, page - 2);
+      const end = Math.min(totalPages, start + 4);
+      for (let p = start; p <= end; p++) {
+        const btn = document.createElement('button');
+        btn.className = `px-3 py-1 rounded ${p === page ? 'bg-emerald-500' : 'bg-white/5'}`;
+        btn.innerText = p;
+        btn.addEventListener('click', () => { state.page = p; load(); });
+        cont.appendChild(btn);
+      }
+
+      addBtn('Next', page === totalPages, () => { state.page = Math.min(totalPages, page +1); load(); });
+      addBtn('Last', page === totalPages, () => { state.page = totalPages; load(); });
+    }
+
+    /* -------------------- Main render flow -------------------- */
+    async function load() {
+      // ensure page is valid
+      const perPageVal = Number($('#perPage').value);
+      state.perPage = perPageVal;
+
+      // fetch (mock)
+      const res = await fetchProjects();
+      const { data, total } = res;
+      const totalPages = Math.max(1, Math.ceil(total / state.perPage));
+      if (state.page > totalPages) state.page = totalPages;
+
+      // update counters
+      $('#showingCount').innerText = data.length;
+      $('#totalCount').innerText = total;
+      $('#updatedAt').innerText = new Date().toLocaleString();
+
+      // render based on view
+      if (state.view === 'table') {
+        $('#tableView').classList.remove('hidden');
+        $('#cardView').classList.add('hidden');
+        renderTable(data);
+      } else {
+        $('#tableView').classList.add('hidden');
+        $('#cardView').classList.remove('hidden');
+        renderCards(data);
+      }
+
+      renderPagination(state.page, totalPages);
+      $('#year').innerText = new Date().getFullYear();
+    }
+
+    /* -------------------- Events -------------------- */
+    function attachEvents() {
+      // search
+      $('#searchBtn').addEventListener('click', () => { state.q = $('#search').value.trim(); state.page = 1; load(); });
+      $('#search').addEventListener('keyup', (e) => { if (e.key === 'Enter') { state.q = e.target.value.trim(); state.page = 1; load(); } });
+
+      // filters
+      $('#chainFilter').addEventListener('change', (e) => { state.chain = e.target.value; state.page = 1; load(); });
+      $('#sortSelect').addEventListener('change', (e) => { state.sort = e.target.value; state.page = 1; load(); });
+      $('#perPage').addEventListener('change', (e) => { state.perPage = Number(e.target.value); state.page = 1; load(); });
+
+      // view toggles
+      $('#viewTable').addEventListener('click', () => { state.view = 'table'; $('#viewTable').classList.add('bg-slate-700'); $('#viewCards').classList.remove('bg-slate-700'); load(); });
+      $('#viewCards').addEventListener('click', () => { state.view = 'cards'; $('#viewCards').classList.add('bg-slate-700'); $('#viewTable').classList.remove('bg-slate-700'); load(); });
+
+      // submit button (placeholder)
+      $('#submitBtn').addEventListener('click', () => { alert('Project submission flow not implemented yet. I can add a submission form + backend if you want.'); });
+    }
+
+    /* -------------------- Init -------------------- */
+    (function init(){
+      attachEvents();
+      // initial load
+      load();
+    })();
+  </script></body>
+</html>
