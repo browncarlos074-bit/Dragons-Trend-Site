@@ -1,0 +1,368 @@
+/* CSS Variables for Dragon Theme */
+:root {
+    --dragon-green-primary: #3CB371; /* MediumSeaGreen */
+    --dragon-green-secondary: #2E8B57; /* SeaGreen - darker */
+    --dark-abyss: #0A1128; /* Very dark blue/green almost black */
+    --fire-orange: #FF6B35;
+    --fire-yellow: #F7931E;
+    --text-color-light: #ffffff;
+    --glow-color: rgba(60, 179, 113, 0.6); /* Green glow */
+    --header-bg-blur: rgba(10, 17, 40, 0.95); /* Darker, slightly blue-green for header */
+    --header-border: rgba(60, 179, 113, 0.2);
+    --header-shadow: rgba(0, 0, 0, 0.5);
+    --button-bg-gradient: linear-gradient(90deg, var(--dragon-green-primary), var(--dragon-green-secondary));
+    --button-hover-gradient: linear-gradient(90deg, var(--dragon-green-secondary), var(--dragon-green-primary));
+}
+
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    font-family: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
+    background: var(--dark-abyss); /* Changed to new dark abyss color */
+    color: var(--text-color-light);
+    line-height: 1.6;
+    overflow-x: hidden;
+    position: relative; /* Needed for absolutely positioned elements like dragon/fire */
+}
+
+.container {
+    max-width: 1400px;
+    margin: 0 auto;
+    padding: 0 20px;
+}
+
+/* Enhanced Main Background - now with Dragon Green */
+.main-background {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: 
+        radial-gradient(circle at 20% 30%, rgba(60, 179, 113, 0.15) 0%, transparent 50%), /* Green glow */
+        radial-gradient(circle at 80% 70%, rgba(46, 139, 87, 0.15) 0%, transparent 50%), /* Darker green glow */
+        radial-gradient(circle at 50% 50%, rgba(138, 43, 226, 0.05) 0%, transparent 50%), /* Subtle purple hint */
+        linear-gradient(135deg, var(--dark-abyss) 0%, #17213C 30%, #1A2E4B 70%, #0D1421 100%); /* Darker blue/green gradient */
+    z-index: -2;
+    overflow: hidden; /* Crucial to contain fire animation within this layer */
+}
+
+/* Fire Animation Overlay */
+.main-background::before,
+.main-background::after {
+    content: '';
+    position: absolute;
+    width: 100%;
+    height: 100%;
+    top: 0;
+    left: 0;
+    pointer-events: none; /* Allows clicks to pass through */
+    z-index: -1;
+    opacity: 0.1; /* Subtle fire effect */
+    background: 
+        radial-gradient(circle at 70% 20%, rgba(255, 107, 53, 0.2) 0%, transparent 50%),
+        radial-gradient(circle at 30% 80%, rgba(247, 147, 30, 0.2) 0%, transparent 50%);
+    animation: fireEffect 15s infinite alternate ease-in-out;
+}
+.main-background::after {
+    animation-delay: 7.5s; /* Offset for a more dynamic effect */
+    opacity: 0.08;
+    transform: scale(1.05);
+}
+
+@keyframes fireEffect {
+    0% {
+        transform: scale(1) translateX(0) translateY(0);
+        opacity: 0.1;
+        filter: blur(5px);
+    }
+    50% {
+        transform: scale(1.02) translateX(5px) translateY(5px);
+        opacity: 0.15;
+        filter: blur(8px);
+    }
+    100% {
+        transform: scale(1) translateX(0) translateY(0);
+        opacity: 0.1;
+        filter: blur(5px);
+    }
+}
+
+/* Moving Dragon Background */
+.dragon-background {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    z-index: -1; /* Above main-background but below content */
+    pointer-events: none;
+    background-image: url('https://i.imgur.com/your-dragon-image.png'); /* REPLACE with your dragon image URL */
+    background-size: contain; /* Adjust as needed: cover, 100%, etc. */
+    background-repeat: no-repeat;
+    background-position: -20% 70%; /* Start off-screen bottom-left */
+    opacity: 0.1; /* Subtle background element */
+    animation: dragonFly 40s infinite linear alternate; /* Adjust duration for speed */
+    filter: grayscale(80%) brightness(0.7) contrast(1.2) sepia(20%) hue-rotate(90deg); /* Make it look mystical and green-tinted */
+}
+
+@keyframes dragonFly {
+    0% {
+        transform: translate(-20vw, 10vh) scale(0.7);
+        background-position: -20% 70%;
+    }
+    25% {
+        transform: translate(10vw, -10vh) scale(0.8);
+        background-position: 50% 30%;
+    }
+    50% {
+        transform: translate(40vw, 5vh) scale(0.9);
+        background-position: 120% 60%; /* Move it off to the right */
+    }
+    75% {
+        transform: translate(70vw, -15vh) scale(0.85);
+        background-position: 80% 20%;
+    }
+    100% {
+        transform: translate(100vw, 0vh) scale(0.75);
+        background-position: -20% 70%; /* Loop back, or adjust for continuous flight */
+    }
+}
+
+/* Header */
+header {
+    position: fixed;
+    top: 0;
+    width: 100%;
+    background: var(--header-bg-blur); /* Changed to new variable */
+    backdrop-filter: blur(20px);
+    z-index: 1000;
+    border-bottom: 1px solid var(--header-border); /* Green border */
+    box-shadow: 0 4px 20px var(--header-shadow);
+}
+
+nav {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 1.2rem 0;
+}
+
+.logo {
+    display: flex;
+    align-items: center;
+    font-family: 'Orbitron', monospace;
+    font-size: 1.8rem;
+    font-weight: 900;
+    color: var(--text-color-light);
+    text-shadow: 0 0 20px var(--glow-color); /* Green glow */
+}
+
+.logo .dragon-icon {
+    width: 50px;
+    height: 50px;
+    background: linear-gradient(135deg, var(--dragon-green-primary), var(--dragon-green-secondary), var(--dragon-green-primary)); /* Green gradient */
+    border-radius: 12px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin-right: 15px;
+    font-size: 1.5rem;
+    box-shadow: 0 8px 25px var(--glow-color); /* Green shadow */
+    border: 2px solid rgba(255, 255, 255, 0.1);
+    position: relative;
+    overflow: hidden;
+}
+
+.logo .dragon-icon::before {
+    content: '';
+    position: absolute;
+    top: -50%;
+    left: -50%;
+    width: 200%;
+    height: 200%;
+    background: linear-gradient(45deg, transparent, rgba(255, 255, 255, 0.2), transparent);
+    animation: shine 3s infinite;
+}
+
+.nav-links {
+    display: flex;
+    list-style: none;
+    gap: 2.5rem;
+}
+
+.nav-links a {
+    color: #e0e0e0;
+    text-decoration: none;
+    transition: all 0.3s ease;
+    font-weight: 500;
+    position: relative;
+    padding: 0.5rem 0;
+}
+
+.nav-links a::after {
+    content: '';
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    width: 0;
+    height: 2px;
+    background: var(--button-bg-gradient); /* Green gradient */
+    transition: width 0.3s ease;
+}
+
+.nav-links a:hover {
+    color: var(--dragon-green-primary); /* Green hover */
+    text-shadow: 0 0 10px rgba(60, 179, 113, 0.4);
+}
+
+.nav-links a:hover::after {
+    width: 100%;
+}
+
+.cta-button {
+    background: var(--button-bg-gradient); /* Green gradient */
+    color: var(--text-color-light);
+    padding: 0.8rem 1.8rem;
+    border-radius: 8px;
+    text-decoration: none;
+    font-weight: 600;
+    transition: all 0.3s ease;
+    box-shadow: 0 6px 20px rgba(60, 179, 113, 0.4); /* Green shadow */
+    border: none;
+    cursor: pointer;
+    position: relative;
+    overflow: hidden;
+}
+
+.cta-button::before {
+    content: '';
+    position: absolute;
+    top: -50%;
+    left: -50%;
+    width: 200%;
+    height: 200%;
+    background: linear-gradient(60deg, transparent, rgba(255, 255, 255, 0.15), transparent);
+    animation: btnShine 2s infinite linear;
+}
+
+.cta-button:hover {
+    background: var(--button-hover-gradient); /* Inverted green gradient */
+    transform: translateY(-3px) scale(1.02);
+    box-shadow: 0 8px 30px var(--glow-color); /* Enhanced green shadow */
+}
+
+/* Hero Section */
+.hero {
+    height: 100vh;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    text-align: center;
+    position: relative;
+    z-index: 1; /* Above backgrounds */
+    padding-top: 100px; /* Offset for fixed header */
+}
+
+.hero h1 {
+    font-family: 'Orbitron', monospace;
+    font-size: 4.5rem;
+    font-weight: 900;
+    margin-bottom: 25px;
+    background: linear-gradient(90deg, var(--dragon-green-primary), #A7F0A0, var(--dragon-green-primary)); /* Green gradient for text */
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    text-shadow: 0 0 30px var(--glow-color); /* Green glow */
+    line-height: 1.1;
+    letter-spacing: -2px;
+}
+
+.hero h1 span {
+    display: block;
+    font-size: 0.8em;
+    font-weight: 700;
+    opacity: 0.9;
+    letter-spacing: normal;
+}
+
+.hero p {
+    font-size: 1.5rem;
+    margin-bottom: 40px;
+    max-width: 800px;
+    color: #c0c0c0;
+    text-shadow: 0 0 15px rgba(60, 179, 113, 0.2);
+}
+
+.hero .cta-buttons {
+    display: flex;
+    gap: 20px;
+}
+
+.hero .cta-buttons .cta-button:first-child {
+    background: var(--button-bg-gradient); /* Primary green button */
+    box-shadow: 0 6px 20px var(--glow-color);
+}
+
+.hero .cta-buttons .cta-button:last-child {
+    background: none;
+    border: 2px solid var(--dragon-green-primary); /* Outlined green button */
+    color: var(--dragon-green-primary);
+    box-shadow: 0 0 15px rgba(60, 179, 113, 0.3);
+}
+
+.hero .cta-buttons .cta-button:last-child:hover {
+    background: rgba(60, 179, 113, 0.1); /* Subtle green background on hover */
+    color: var(--text-color-light);
+    border-color: var(--dragon-green-secondary);
+    box-shadow: 0 0 25px var(--glow-color);
+}
+
+/* Section Styling */
+section {
+    padding: 100px 0;
+    position: relative;
+    z-index: 1;
+    background: linear-gradient(180deg, rgba(10, 17, 40, 0.8) 0%, rgba(10, 17, 40, 0.9) 100%); /* Darker background for sections */
+    border-top: 1px solid rgba(60, 179, 113, 0.1);
+    border-bottom: 1px solid rgba(60, 179, 113, 0.1);
+    box-shadow: inset 0 0 20px rgba(0, 0, 0, 0.3);
+}
+
+section h2 {
+    font-family: 'Orbitron', monospace;
+    font-size: 3rem;
+    text-align: center;
+    margin-bottom: 60px;
+    color: var(--dragon-green-primary);
+    text-shadow: 0 0 20px var(--glow-color);
+    position: relative;
+}
+
+section h2::after {
+    content: '';
+    position: absolute;
+    bottom: -15px;
+    left: 50%;
+    transform: translateX(-50%);
+    width: 80px;
+    height: 4px;
+    background: var(--button-bg-gradient); /* Green gradient underline */
+    border-radius: 2px;
+}
+
+.grid-3-cols {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+    gap: 40px;
+}
+
+.feature-card {
+    background: rgba(17, 25, 40, 0.8); /* Darker card background */
+    border: 1px solid rgba(60, 179, 113, 0.2); /* Green border */
+    border-radius: 15px;
+    padding: 30px
