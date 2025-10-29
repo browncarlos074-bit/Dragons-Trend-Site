@@ -1,0 +1,188 @@
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+body {
+  background: linear-gradient(135deg, #0f0f23, #1a1a2e);
+  color: white;
+  font-family: 'Poppins', sans-serif;
+  overflow-x: hidden;
+}
+
+/* HEADER */
+.header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 20px 50px;
+  background: #0c0c1b;
+  border-bottom: 1px solid rgba(255, 215, 0, 0.2);
+  position: sticky;
+  top: 0;
+  z-index: 999;
+}
+
+.header .logo img {
+  height: 60px;
+}
+
+.nav-links a {
+  color: #ffd700;
+  margin-left: 25px;
+  text-decoration: none;
+  font-weight: 600;
+  transition: color 0.3s;
+}
+
+.nav-links a:hover {
+  color: white;
+}
+
+/* HERO */
+.hero {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 100px 10%;
+}
+
+.hero-content {
+  max-width: 50%;
+}
+
+.hero-content h1 {
+  font-size: 3em;
+  color: #ffd700;
+}
+
+.hero-content span {
+  color: white;
+}
+
+.hero-content p {
+  margin: 20px 0;
+  color: #ccc;
+}
+
+.cta-btn {
+  display: inline-block;
+  background: #ffd700;
+  color: #0f0f23;
+  padding: 12px 25px;
+  border-radius: 25px;
+  font-weight: 700;
+  transition: 0.3s;
+  text-decoration: none;
+}
+
+.cta-btn:hover {
+  background: #e6b800;
+}
+
+.hero-image img {
+  width: 320px;
+  animation: float 4s ease-in-out infinite;
+}
+
+@keyframes float {
+  0%, 100% { transform: translateY(0); }
+  50% { transform: translateY(-15px); }
+}
+
+/* WHY SECTION */
+.why-section {
+  text-align: center;
+  padding: 80px 10%;
+}
+
+.why-section h2 {
+  font-size: 2.5em;
+  margin-bottom: 40px;
+  color: #ffd700;
+}
+
+.features-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+  gap: 30px;
+}
+
+.feature-card {
+  background: #141414;
+  border: 1px solid rgba(255, 215, 0, 0.2);
+  border-radius: 20px;
+  padding: 25px;
+  transition: 0.3s;
+}
+
+.feature-card:hover {
+  border-color: #ffd700;
+  box-shadow: 0 0 25px rgba(255, 215, 0, 0.2);
+}
+
+.feature-card .icon {
+  font-size: 2.5em;
+  color: #ffd700;
+  margin-bottom: 15px;
+}
+
+.feature-card h3 {
+  color: #ffd700;
+  margin-bottom: 10px;
+}
+
+/* ECOSYSTEM */
+.ecosystem {
+  text-align: center;
+  padding: 80px 10%;
+  background: #0c0c1b;
+  border-top: 1px solid rgba(255, 215, 0, 0.2);
+}
+
+.ecosystem h2 {
+  color: #ffd700;
+  font-size: 2.2em;
+}
+
+.ecosystem h3 {
+  color: white;
+  margin: 15px 0;
+}
+
+.ecosystem p {
+  color: #ccc;
+  max-width: 700px;
+  margin: 0 auto 30px auto;
+}
+
+/* FOOTER */
+.footer {
+  text-align: center;
+  background: #0c0c1b;
+  padding: 50px 10%;
+  border-top: 1px solid rgba(255, 215, 0, 0.2);
+}
+
+.footer h3 {
+  color: #ffd700;
+  margin-bottom: 20px;
+}
+
+.social-links a {
+  color: #ffd700;
+  font-size: 1.8em;
+  margin: 0 10px;
+  transition: 0.3s;
+}
+
+.social-links a:hover {
+  color: white;
+}
+
+.footer p {
+  color: #aaa;
+  margin-top: 15px;
+  font-size: 0.9em;
+}
