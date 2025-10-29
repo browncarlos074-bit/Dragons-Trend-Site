@@ -1,0 +1,367 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width,initial-scale=1" />
+  <title>Dragons Trend — Discover, Vote & Promote the Best Memecoins</title>
+
+  <!-- Tailwind CDN -->
+  <script src="https://cdn.tailwindcss.com"></script>
+
+  <!-- Font Awesome -->
+  <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" rel="stylesheet">
+
+  <meta name="description" content="Dragons Trend - community-driven memecoin discovery hub. Powered by $DRGN.">
+
+  <style>
+    /* Custom small styles & animations */
+    :root {
+      --gold-1: #ffd24d;
+      --gold-2: #ffb84d;
+      --ember: #ff4b2b;
+    }
+
+    /* Smooth clip gradient text fallback for older browsers */
+    .gradient-text {
+      background: linear-gradient(90deg, #ffd24d, #ff9b3f, #ff4b2b);
+      -webkit-background-clip: text;
+      background-clip: text;
+      color: transparent;
+    }
+
+    /* subtle mascot bounce */
+    @keyframes float-slow {
+      0% { transform: translateY(0); }
+      50% { transform: translateY(-10px); }
+      100% { transform: translateY(0); }
+    }
+
+    .float-slow { animation: float-slow 6s ease-in-out infinite; }
+
+    /* reveal animations */
+    .reveal { opacity: 0; transform: translateY(12px); transition: all 700ms cubic-bezier(.2,.9,.3,1); }
+    .reveal.visible { opacity: 1; transform: translateY(0); }
+
+    /* glass/gold border */
+    .gold-border { border: 1px solid rgba(255, 210, 77, 0.12); background: rgba(255,255,255,0.02); }
+
+    /* hover glow */
+    .glow-hover:hover { box-shadow: 0 12px 32px rgba(255, 197, 66, 0.12); transform: translateY(-6px); transition: all 250ms ease; }
+
+    /* slow bounce for hero mascot bottom */
+    .animate-bounce-slow { animation: float-slow 5s ease-in-out infinite; }
+
+    /* responsive mascot hide on small */
+    @media (max-width: 768px) {
+      .hero-mascot { display: none; }
+    }
+
+    /* custom scroll behavior */
+    html { scroll-behavior: smooth; }
+
+    /* small button accent */
+    .btn-gold {
+      background: linear-gradient(90deg, var(--gold-1), var(--gold-2));
+      color: #000;
+    }
+  </style>
+</head>
+
+<body class="bg-black text-gray-100 antialiased">
+
+  <!-- NAVBAR -->
+  <nav class="fixed w-full z-40 bg-black/70 backdrop-blur-sm border-b border-yellow-500/10">
+    <div class="max-w-7xl mx-auto px-6 md:px-10 py-3 flex items-center justify-between">
+      <div class="flex items-center gap-3">
+        <img src="assets/logo.png" alt="Dragons Trend logo" class="h-12 w-auto" />
+        <div>
+          <div class="text-lg font-extrabold gradient-text leading-tight">Dragons Trend</div>
+          <div class="text-xs text-gray-400 -mt-1">Community-driven memecoin discovery</div>
+        </div>
+      </div>
+
+      <div class="hidden md:flex items-center gap-6">
+        <a href="#home" class="text-sm text-gray-300 hover:text-white" data-scroll>Home</a>
+        <a href="#listings" class="text-sm text-gray-300 hover:text-white" data-scroll>Listings</a>
+        <a href="#ecosystem" class="text-sm text-gray-300 hover:text-white" data-scroll>$DRGN</a>
+        <a href="#features" class="text-sm text-gray-300 hover:text-white" data-scroll>Features</a>
+        <a href="#contact" class="text-sm text-gray-300 hover:text-white" data-scroll>Contact</a>
+        <a href="Dragons_Trend_Whitepaper.pdf" download class="ml-3 px-4 py-2 rounded-full btn-gold text-sm font-semibold shadow">Whitepaper</a>
+      </div>
+
+      <div class="md:hidden">
+        <button id="mobileToggle" class="p-2 rounded bg-white/5"><i class="fa-solid fa-bars"></i></button>
+      </div>
+    </div>
+
+    <!-- mobile menu -->
+    <div id="mobileMenu" class="hidden md:hidden bg-black/80 border-t border-yellow-500/8">
+      <div class="px-6 py-4 flex flex-col gap-3">
+        <a href="#home" class="text-gray-300" data-scroll-mobile>Home</a>
+        <a href="#listings" class="text-gray-300" data-scroll-mobile>Listings</a>
+        <a href="#ecosystem" class="text-gray-300" data-scroll-mobile>$DRGN</a>
+        <a href="#features" class="text-gray-300" data-scroll-mobile>Features</a>
+        <a href="#contact" class="text-gray-300" data-scroll-mobile>Contact</a>
+      </div>
+    </div>
+  </nav>
+
+  <!-- HERO -->
+  <main id="home" class="pt-24">
+    <section class="relative overflow-hidden">
+      <div class="max-w-7xl mx-auto px-6 md:px-10 py-20 lg:py-28 flex flex-col lg:flex-row items-center gap-10">
+        <!-- left: text -->
+        <div class="flex-1 reveal" data-reveal>
+          <h1 class="text-4xl md:text-6xl font-extrabold leading-tight mb-4 gradient-text">
+            Discover, Vote & Promote the Best Memecoins
+          </h1>
+          <p class="text-gray-300 max-w-2xl mb-6">
+            The #1 community-driven memecoin discovery hub — explore verified blockchain projects, vote for your favorites, and rise with the $DRGN ecosystem.
+          </p>
+
+          <div class="flex flex-wrap gap-3">
+            <a href="#features" class="inline-flex items-center gap-2 px-5 py-3 rounded-full btn-gold font-semibold shadow glow-hover" data-scroll>
+              <i class="fa-solid fa-fire"></i> Explore Features
+            </a>
+            <a href="Dragons_Trend_Whitepaper.pdf" download class="inline-flex items-center gap-2 px-5 py-3 rounded-full border border-yellow-600 text-yellow-400 hover:bg-yellow-500 hover:text-black transition">
+              <i class="fa-solid fa-scroll"></i> Download Whitepaper
+            </a>
+            <a href="#listings" class="inline-flex items-center gap-2 px-5 py-3 rounded-full bg-white/5 text-sm hover:bg-white/8 transition" data-scroll>
+              View Listings
+            </a>
+          </div>
+
+          <!-- small social row -->
+          <div class="mt-6 flex items-center gap-3">
+            <a href="https://t.me/Dragonstrend" class="p-3 rounded-full bg-[#111] hover:bg-yellow-500 text-yellow-400 hover:text-black transition" target="_blank"><i class="fa-brands fa-telegram"></i></a>
+            <a href="https://x.com/Dragonstrend" class="p-3 rounded-full bg-[#111] hover:bg-yellow-500 text-yellow-400 hover:text-black transition" target="_blank"><i class="fa-brands fa-x-twitter"></i></a>
+            <a href="https://discord.gg/KRJeBMS9nx" class="p-3 rounded-full bg-[#111] hover:bg-yellow-500 text-yellow-400 hover:text-black transition" target="_blank"><i class="fa-brands fa-discord"></i></a>
+            <a href="https://www.youtube.com/@DragonsTrending" class="p-3 rounded-full bg-[#111] hover:bg-yellow-500 text-yellow-400 hover:text-black transition" target="_blank"><i class="fa-brands fa-youtube"></i></a>
+            <a href="https://linktr.ee/dragonstrend" class="p-3 rounded-full bg-[#111] hover:bg-yellow-500 text-yellow-400 hover:text-black transition" target="_blank"><i class="fa-solid fa-link"></i></a>
+            <a href="https://t.me/Dragonstrend_bot" class="p-3 rounded-full bg-[#111] hover:bg-yellow-500 text-yellow-400 hover:text-black transition" target="_blank"><i class="fa-solid fa-robot"></i></a>
+          </div>
+        </div>
+
+        <!-- right: mascot + CTA card -->
+        <div class="w-full lg:w-96 flex-shrink-0 reveal" data-reveal>
+          <div class="relative">
+            <div class="p-6 rounded-2xl gold-border bg-gradient-to-b from-black/60 to-black/40">
+              <img src="assets/mascot.png" alt="Dragon Mascot" class="mx-auto hero-mascot w-56 md:w-64 animate-bounce-slow" />
+              <div class="mt-4 text-center">
+                <div class="text-sm text-gray-400">Featured Mascot</div>
+                <div class="text-lg font-semibold text-yellow-400">Dragons Trend Guardian</div>
+              </div>
+            </div>
+
+            <!-- small card under mascot -->
+            <div class="absolute left-4 bottom-0 transform translate-y-12 bg-[#0b0b0b] p-3 rounded-xl border border-yellow-500/12 hidden md:block">
+              <div class="text-xs text-gray-300">Want to promote a project?</div>
+              <a href="#ecosystem" class="text-sm font-semibold text-yellow-400 hover:underline" data-scroll>Explore $DRGN Portal →</a>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- LISTINGS (placeholder or future dynamic) -->
+    <section id="listings" class="py-16 px-6 md:px-10">
+      <div class="max-w-7xl mx-auto reveal" data-reveal>
+        <div class="flex items-center justify-between mb-6">
+          <div>
+            <h2 class="text-2xl md:text-3xl font-bold text-yellow-400">Trending Projects</h2>
+            <p class="text-gray-400 text-sm">Live listings, votes, and analytics — coming soon.</p>
+          </div>
+          <div class="flex items-center gap-3">
+            <a href="Dragons_Trend_Whitepaper.pdf" download class="px-4 py-2 rounded-full btn-gold text-sm font-semibold">Download Whitepaper</a>
+          </div>
+        </div>
+
+        <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+          <!-- sample cards (mock) -->
+          <!-- You can replace these with dynamic content from listings.html later -->
+          <div class="p-5 rounded-2xl gold-border hover:shadow-lg transition reveal" data-reveal>
+            <div class="flex items-center gap-4">
+              <div class="w-14 h-14 rounded-lg bg-yellow-500/10 flex items-center justify-center text-yellow-400 font-bold">DT</div>
+              <div>
+                <div class="font-semibold">DragonToken 1</div>
+                <div class="text-xs text-gray-400">DRGN1 • ETH</div>
+              </div>
+            </div>
+            <div class="mt-4 flex items-center justify-between">
+              <div>
+                <div class="text-sm text-gray-300">Price</div>
+                <div class="font-semibold">$0.00042</div>
+              </div>
+              <div class="text-right">
+                <div class="text-sm text-gray-300">24h</div>
+                <div class="text-green-400 font-semibold">+12.5%</div>
+              </div>
+            </div>
+            <div class="mt-4 flex items-center gap-3">
+              <button class="px-3 py-1 rounded bg-white/5 text-sm">Site</button>
+              <button class="px-3 py-1 rounded bg-white/5 text-sm">TG</button>
+              <button class="ml-auto px-3 py-1 rounded bg-yellow-500 text-black font-semibold">Vote</button>
+            </div>
+          </div>
+
+          <div class="p-5 rounded-2xl gold-border hover:shadow-lg transition reveal" data-reveal>
+            <div class="flex items-center gap-4">
+              <div class="w-14 h-14 rounded-lg bg-yellow-500/10 flex items-center justify-center text-yellow-400 font-bold">DT</div>
+              <div>
+                <div class="font-semibold">DragonToken 2</div>
+                <div class="text-xs text-gray-400">DRGN2 • BSC</div>
+              </div>
+            </div>
+            <div class="mt-4 flex items-center justify-between">
+              <div>
+                <div class="text-sm text-gray-300">Price</div>
+                <div class="font-semibold">$0.0012</div>
+              </div>
+              <div class="text-right">
+                <div class="text-sm text-gray-300">24h</div>
+                <div class="text-red-400 font-semibold">-3.2%</div>
+              </div>
+            </div>
+            <div class="mt-4 flex items-center gap-3">
+              <button class="px-3 py-1 rounded bg-white/5 text-sm">Site</button>
+              <button class="px-3 py-1 rounded bg-white/5 text-sm">TG</button>
+              <button class="ml-auto px-3 py-1 rounded bg-yellow-500 text-black font-semibold">Vote</button>
+            </div>
+          </div>
+
+          <div class="p-5 rounded-2xl gold-border hover:shadow-lg transition reveal" data-reveal>
+            <div class="flex items-center gap-4">
+              <div class="w-14 h-14 rounded-lg bg-yellow-500/10 flex items-center justify-center text-yellow-400 font-bold">DT</div>
+              <div>
+                <div class="font-semibold">DragonToken 3</div>
+                <div class="text-xs text-gray-400">DRGN3 • ETH</div>
+              </div>
+            </div>
+            <div class="mt-4 flex items-center justify-between">
+              <div>
+                <div class="text-sm text-gray-300">Price</div>
+                <div class="font-semibold">$0.00009</div>
+              </div>
+              <div class="text-right">
+                <div class="text-sm text-gray-300">24h</div>
+                <div class="text-green-400 font-semibold">+4.7%</div>
+              </div>
+            </div>
+            <div class="mt-4 flex items-center gap-3">
+              <button class="px-3 py-1 rounded bg-white/5 text-sm">Site</button>
+              <button class="px-3 py-1 rounded bg-white/5 text-sm">TG</button>
+              <button class="ml-auto px-3 py-1 rounded bg-yellow-500 text-black font-semibold">Vote</button>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- $DRGN ECOSYSTEM -->
+    <section id="ecosystem" class="py-20 bg-gradient-to-b from-[#050505] to-[#0b0b0b] text-center">
+      <div class="max-w-4xl mx-auto reveal" data-reveal>
+        <h2 class="text-3xl md:text-4xl font-extrabold gradient-text mb-3">$DRGN Ecosystem</h2>
+        <h3 class="text-lg text-yellow-400 font-semibold mb-4">Powered by $DRGN Token</h3>
+        <p class="text-gray-400 mb-6">
+          Experience the full potential of our revolutionary ecosystem through the $DRGN token — your premium gateway to exclusive features, 
+          advanced analytics, insider insights, and community governance participation.
+        </p>
+
+        <a href="https://t.me/DRGN_Portal" target="_blank" class="inline-flex items-center gap-3 px-6 py-3 rounded-full btn-gold font-semibold shadow hover:scale-105 transition">
+          <i class="fa-solid fa-dragon"></i> Access $DRGN Portal
+        </a>
+      </div>
+    </section>
+
+    <!-- FEATURES -->
+    <section id="features" class="py-20 px-6 md:px-10 bg-black">
+      <div class="max-w-7xl mx-auto reveal" data-reveal>
+        <h2 class="text-3xl md:text-4xl font-extrabold text-yellow-400 mb-6">Why Choose Dragons Trend</h2>
+        <p class="text-gray-400 mb-8">Community-first discovery, transparent rankings, and tools that empower both projects and holders.</p>
+
+        <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
+          <!-- feature cards -->
+          <div class="p-6 rounded-2xl gold-border hover:shadow-lg transition reveal" data-reveal>
+            <div class="flex items-center gap-3 mb-3">
+              <div class="text-2xl text-yellow-400"><i class="fa-solid fa-fire"></i></div>
+              <div class="font-semibold">Dragon Pulse™</div>
+            </div>
+            <p class="text-sm text-gray-300">Live hype meter combining social activity, voting momentum, and visits to create a dynamic trend score.</p>
+          </div>
+
+          <div class="p-6 rounded-2xl gold-border hover:shadow-lg transition reveal" data-reveal>
+            <div class="flex items-center gap-3 mb-3">
+              <div class="text-2xl text-yellow-400"><i class="fa-solid fa-egg"></i></div>
+              <div class="font-semibold">Dragon Nest</div>
+            </div>
+            <p class="text-sm text-gray-300">Incubator for micro-cap projects — mentorship, spotlighting, and a transparent path to verified status.</p>
+          </div>
+
+          <div class="p-6 rounded-2xl gold-border hover:shadow-lg transition reveal" data-reveal>
+            <div class="flex items-center gap-3 mb-3">
+              <div class="text-2xl text-yellow-400"><i class="fa-solid fa-shield-halved"></i></div>
+              <div class="font-semibold">FairVote™</div>
+            </div>
+            <p class="text-sm text-gray-300">Multi-step voting verification to keep rankings honest and reflective of real community sentiment.</p>
+          </div>
+
+          <div class="p-6 rounded-2xl gold-border hover:shadow-lg transition reveal" data-reveal>
+            <div class="flex items-center gap-3 mb-3">
+              <div class="text-2xl text-yellow-400"><i class="fa-solid fa-coins"></i></div>
+              <div class="font-semibold">Dragon Points</div>
+            </div>
+            <p class="text-sm text-gray-300">Earn points for engagement: vote, share, and refer. Level up for perks and voting power.</p>
+          </div>
+
+          <div class="p-6 rounded-2xl gold-border hover:shadow-lg transition reveal" data-reveal>
+            <div class="flex items-center gap-3 mb-3">
+              <div class="text-2xl text-yellow-400"><i class="fa-solid fa-robot"></i></div>
+              <div class="font-semibold">Dragon AI Scout</div>
+            </div>
+            <p class="text-sm text-gray-300">AI risk analysis and safety scoring based on contract checks, liquidity, and audit signals.</p>
+          </div>
+
+          <div class="p-6 rounded-2xl gold-border hover:shadow-lg transition reveal" data-reveal>
+            <div class="flex items-center gap-3 mb-3">
+              <div class="text-2xl text-yellow-400"><i class="fa-solid fa-eye"></i></div>
+              <div class="font-semibold">Community Watchtower</div>
+            </div>
+            <p class="text-sm text-gray-300">Crowdsourced reporting with moderator oversight to protect the community from scams and rug pulls.</p>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- CONTACT / SOCIAL BAR -->
+    <section id="contact" class="py-12 bg-[#070707]">
+      <div class="max-w-4xl mx-auto text-center reveal" data-reveal>
+        <h3 class="text-2xl font-semibold text-yellow-400 mb-4">Connect With Dragons Trend</h3>
+        <p class="text-gray-400 mb-6">Join our community on Telegram, X, Discord, YouTube and more.</p>
+
+        <div class="flex justify-center gap-4 flex-wrap">
+          <a href="https://t.me/Dragonstrend" target="_blank" class="w-12 h-12 flex items-center justify-center rounded-full bg-[#111] hover:bg-yellow-500 text-yellow-400 hover:text-black transition"><i class="fa-brands fa-telegram"></i></a>
+          <a href="https://x.com/Dragonstrend" target="_blank" class="w-12 h-12 flex items-center justify-center rounded-full bg-[#111] hover:bg-yellow-500 text-yellow-400 hover:text-black transition"><i class="fa-brands fa-x-twitter"></i></a>
+          <a href="https://discord.gg/KRJeBMS9nx" target="_blank" class="w-12 h-12 flex items-center justify-center rounded-full bg-[#111] hover:bg-yellow-500 text-yellow-400 hover:text-black transition"><i class="fa-brands fa-discord"></i></a>
+          <a href="https://www.youtube.com/@DragonsTrending" target="_blank" class="w-12 h-12 flex items-center justify-center rounded-full bg-[#111] hover:bg-yellow-500 text-yellow-400 hover:text-black transition"><i class="fa-brands fa-youtube"></i></a>
+          <a href="https://linktr.ee/dragonstrend" target="_blank" class="w-12 h-12 flex items-center justify-center rounded-full bg-[#111] hover:bg-yellow-500 text-yellow-400 hover:text-black transition"><i class="fa-solid fa-link"></i></a>
+          <a href="https://t.me/Dragonstrend_bot" target="_blank" class="w-12 h-12 flex items-center justify-center rounded-full bg-[#111] hover:bg-yellow-500 text-yellow-400 hover:text-black transition"><i class="fa-solid fa-robot"></i></a>
+        </div>
+      </div>
+    </section>
+
+    <!-- FOOTER with small mascot on left -->
+    <footer class="bg-black border-t border-yellow-500/8 py-8">
+      <div class="max-w-7xl mx-auto px-6 md:px-10 flex flex-col md:flex-row items-center justify-between gap-6">
+        <div class="flex items-center gap-4">
+          <img src="assets/logo.png" alt="Dragons Trend" class="h-10" />
+          <div class="text-sm text-gray-400">© <span id="year"></span> Dragons Trend. All rights reserved.</div>
+        </div>
+
+        <div class="text-sm text-gray-400">Built with ❤️ for the $DRGN community</div>
+
+        <div class="hidden md:block">
+          <img src="assets/mascot.png" alt="mascot" class="h-20 opacity-90" />
+        </div>
+      </div>
+    </footer>
+  </mai
