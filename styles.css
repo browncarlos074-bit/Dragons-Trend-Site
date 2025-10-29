@@ -1,0 +1,161 @@
+/* style.css — Dragons Trend custom styles */
+
+/* --- Basics & background --- */
+:root{
+  --gold-1: #fbbf24;
+  --gold-2: #f59e0b;
+  --ember: #ff4b2b;
+  --bg-start: #0a0a0a;
+  --bg-end: #000000;
+}
+
+html, body {
+  height: 100%;
+  margin: 0;
+  padding: 0;
+  background: radial-gradient(circle at center, var(--bg-start) 0%, var(--bg-end) 100%);
+  font-family: "Poppins", system-ui, -apple-system, "Segoe UI", Roboto, "Helvetica Neue", Arial;
+  color: #fff;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  scroll-behavior: smooth;
+}
+
+/* --- Text gradients & glow --- */
+.gold-gradient {
+  background: linear-gradient(90deg, var(--gold-1), var(--gold-2));
+  -webkit-background-clip: text;
+  background-clip: text;
+  -webkit-text-fill-color: transparent;
+  color: transparent;
+}
+
+.glow-text {
+  text-shadow: 0 0 18px rgba(255, 215, 0, 0.7);
+}
+
+/* --- Buttons / common UI --- */
+.btn-gold {
+  background: linear-gradient(90deg, var(--gold-1), var(--gold-2));
+  color: #000;
+}
+
+.hover-glow:hover {
+  filter: drop-shadow(0 0 20px rgba(255, 215, 0, 0.9));
+  transform: scale(1.05);
+  transition: all 0.28s ease;
+}
+
+/* --- Floating mascot animation --- */
+@keyframes float {
+  0%, 100% { transform: translateY(0); }
+  50% { transform: translateY(-10px); }
+}
+.float-dragon {
+  animation: float 4s ease-in-out infinite;
+}
+
+/* --- Token card hover --- */
+.token-card {
+  transition: transform .25s ease, box-shadow .25s ease;
+}
+.token-card:hover {
+  transform: translateY(-6px);
+  box-shadow: 0 12px 34px rgba(255, 215, 0, 0.14);
+}
+
+/* --- Navbar sticky style fallback --- */
+.nav-sticky {
+  background-color: rgba(0,0,0,0.78);
+  backdrop-filter: blur(6px);
+  -webkit-backdrop-filter: blur(6px);
+  border-bottom: 1px solid rgba(255, 210, 77, 0.06);
+}
+
+/* --- small gold border card style used around mascot etc. --- */
+.gold-border {
+  border: 1px solid rgba(255, 210, 77, 0.12);
+  background: rgba(255,255,255,0.02);
+  border-radius: 1rem;
+}
+
+/* --- Social icons --- */
+.social-icon {
+  transition: transform .25s ease, filter .25s ease;
+}
+.social-icon:hover {
+  transform: scale(1.18);
+  filter: drop-shadow(0 0 12px #facc15);
+}
+
+/* --- Scrollbar (WebKit) --- */
+::-webkit-scrollbar {
+  width: 8px;
+  height: 8px;
+}
+::-webkit-scrollbar-thumb {
+  background: linear-gradient(to bottom, var(--gold-1), var(--ember));
+  border-radius: 10px;
+}
+::-webkit-scrollbar-track {
+  background: transparent;
+}
+
+/* --- Selection color --- */
+::selection {
+  background: var(--gold-1);
+  color: #000;
+}
+
+/* --- Responsive tweaks --- */
+@media (max-width: 768px) {
+  .hero-mascot { display: none; }
+  .float-dragon { animation-duration: 5.5s; }
+}
+
+/* --- subtle drop shadows for elevated UI --- */
+.drop-shadow-gold {
+  box-shadow: 0 10px 30px rgba(255, 197, 66, 0.09);
+}
+
+/* --- small helper for reveal animations (if using JS) --- */
+.reveal {
+  opacity: 0;
+  transform: translateY(12px);
+  transition: all 700ms cubic-bezier(.2,.9,.3,1);
+}
+.reveal.visible {
+  opacity: 1;
+  transform: translateY(0);
+}
+
+/* --- utility: card border used across site --- */
+.card-border {
+  border: 1px solid rgba(255, 210, 77, 0.08);
+  border-radius: 14px;
+  background: linear-gradient(180deg, rgba(255,255,255,0.01), rgba(255,255,255,0.005));
+}
+
+/* --- footer mascot size --- */
+.footer-mascot {
+  opacity: 0.95;
+  filter: saturate(1.05);
+  border-radius: 8px;
+}
+
+/* --- form/button minor transitions --- */
+button, a {
+  transition: all .18s ease;
+}
+
+/* --- small utility spacing for token card buttons --- */
+.token-actions > button {
+  min-width: 84px;
+}
+
+/* --- ensure images are crisp on mobile --- */
+img {
+  image-rendering: auto;
+  -webkit-user-drag: none;
+  -webkit-touch-callout: none;
+}
