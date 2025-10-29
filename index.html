@@ -1,0 +1,150 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Dragons Trend - #1 Memecoin Discovery Hub</title>
+  <link href="https://cdn.jsdelivr.net/npm/tailwindcss@3.4.3/dist/tailwind.min.css" rel="stylesheet">
+  <link rel="icon" href="logo.png">
+  <style>
+    body {
+      background: radial-gradient(circle at center, #0a0a0a 0%, #000000 100%);
+      font-family: 'Poppins', sans-serif;
+      color: white;
+      overflow-x: hidden;
+    }
+    .gold-gradient {
+      background: linear-gradient(90deg, #fbbf24, #f59e0b);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+    }
+    .glow-text {
+      text-shadow: 0 0 15px rgba(255, 215, 0, 0.7);
+    }
+    .float-dragon {
+      animation: float 4s ease-in-out infinite;
+    }
+    @keyframes float {
+      0%, 100% { transform: translateY(0); }
+      50% { transform: translateY(-10px); }
+    }
+    .social-icon:hover {
+      transform: scale(1.2);
+      transition: 0.3s ease;
+      filter: drop-shadow(0 0 10px #facc15);
+    }
+    .hover-glow:hover {
+      filter: drop-shadow(0 0 20px rgba(255, 215, 0, 0.9));
+      transform: scale(1.05);
+      transition: all 0.3s ease;
+    }
+    .token-card:hover {
+      transform: translateY(-5px);
+      box-shadow: 0 0 20px rgba(255, 215, 0, 0.2);
+      transition: 0.3s ease;
+    }
+  </style>
+</head>
+<body class="flex flex-col min-h-screen">
+
+  <!-- Navbar -->
+  <nav class="flex items-center justify-between px-6 py-4 bg-black/80 border-b border-yellow-500/30 sticky top-0 z-50 backdrop-blur-md">
+    <div class="flex items-center space-x-3">
+      <img src="logo.png" alt="Dragons Trend Logo" class="w-12 h-12 hover-glow">
+      <h1 class="text-2xl font-bold gold-gradient">Dragons Trend</h1>
+    </div>
+    <a href="Dragons_Trend_Whitepaper.pdf" class="bg-yellow-500 hover:bg-yellow-600 text-black font-semibold px-4 py-2 rounded-lg shadow-lg transition">📜 Whitepaper</a>
+  </nav>
+
+  <!-- Hero -->
+  <section class="flex flex-col-reverse md:flex-row items-center justify-between px-6 md:px-16 py-16 gap-10">
+    <div class="max-w-xl text-center md:text-left">
+      <h2 class="text-4xl md:text-5xl font-extrabold gold-gradient mb-4">#1 Memecoin Discovery Hub</h2>
+      <p class="text-gray-300 leading-relaxed">
+        Dragons Trend is the #1 community-driven memecoin discovery hub — showcasing the hottest and most promising blockchain projects.
+        It empowers users to vote, discover, and promote legit projects while maintaining a strong connection with the $DRGN ecosystem 
+        through verified listings and fair ranking.
+      </p>
+      <div class="mt-8 flex flex-col sm:flex-row justify-center md:justify-start gap-4">
+        <a href="https://t.me/Dragonstrend_bot" target="_blank" class="bg-yellow-500 hover:bg-yellow-600 text-black font-semibold px-6 py-3 rounded-lg shadow-lg transition hover:shadow-yellow-400/50">🚀 Launch Bot</a>
+        <a href="https://t.me/DRGN_Portal" target="_blank" class="border border-yellow-500 text-yellow-500 hover:bg-yellow-500 hover:text-black font-semibold px-6 py-3 rounded-lg transition">💎 Access $DRGN Portal</a>
+      </div>
+    </div>
+    <div class="flex justify-center w-full md:w-auto">
+      <img src="mascot.png" alt="Dragon Mascot" class="w-64 md:w-80 float-dragon drop-shadow-[0_0_30px_rgba(255,215,0,0.5)]">
+    </div>
+  </section>
+
+  <!-- 🔥 Live Listings -->
+  <section class="py-16 px-6 md:px-16 bg-black/70 border-t border-yellow-500/20">
+    <h3 class="text-3xl font-bold text-center mb-10 glow-text">🔥 Live Listings</h3>
+    <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-8">
+      <!-- Card 1 -->
+      <div class="token-card bg-gray-900/60 p-6 rounded-2xl border border-yellow-500/30">
+        <div class="flex items-center mb-4 space-x-3">
+          <img src="https://cryptologos.cc/logos/dogecoin-doge-logo.png" class="w-10 h-10 rounded-full">
+          <h4 class="text-xl font-semibold">DogeRise ($DGR)</h4>
+        </div>
+        <p class="text-gray-400 text-sm mb-4">A new-generation meme token combining humor, community, and DeFi utilities.</p>
+        <div class="flex justify-between items-center">
+          <span class="text-yellow-400 font-bold">Votes: 12,489</span>
+          <button class="bg-yellow-500 hover:bg-yellow-600 text-black px-3 py-1 rounded-md font-semibold">Vote Now</button>
+        </div>
+      </div>
+
+      <!-- Card 2 -->
+      <div class="token-card bg-gray-900/60 p-6 rounded-2xl border border-yellow-500/30">
+        <div class="flex items-center mb-4 space-x-3">
+          <img src="https://cryptologos.cc/logos/shiba-inu-shib-logo.png" class="w-10 h-10 rounded-full">
+          <h4 class="text-xl font-semibold">ShibaVerse ($SHIV)</h4>
+        </div>
+        <p class="text-gray-400 text-sm mb-4">Expanding the Shiba community into a 3D metaverse where creativity rules.</p>
+        <div class="flex justify-between items-center">
+          <span class="text-yellow-400 font-bold">Votes: 9,352</span>
+          <button class="bg-yellow-500 hover:bg-yellow-600 text-black px-3 py-1 rounded-md font-semibold">Vote Now</button>
+        </div>
+      </div>
+
+      <!-- Card 3 -->
+      <div class="token-card bg-gray-900/60 p-6 rounded-2xl border border-yellow-500/30">
+        <div class="flex items-center mb-4 space-x-3">
+          <img src="https://cryptologos.cc/logos/pepe-pepe-logo.png" class="w-10 h-10 rounded-full">
+          <h4 class="text-xl font-semibold">DragonPepe ($DPE)</h4>
+        </div>
+        <p class="text-gray-400 text-sm mb-4">The meme dragon of the crypto world, powered by $DRGN ecosystem rewards.</p>
+        <div class="flex justify-between items-center">
+          <span class="text-yellow-400 font-bold">Votes: 7,021</span>
+          <button class="bg-yellow-500 hover:bg-yellow-600 text-black px-3 py-1 rounded-md font-semibold">Vote Now</button>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Ecosystem -->
+  <section class="bg-gradient-to-r from-yellow-700/20 to-yellow-800/10 py-16 text-center border-t border-yellow-500/20">
+    <h3 class="text-3xl font-bold mb-3 glow-text">$DRGN Ecosystem</h3>
+    <h4 class="text-xl text-yellow-400 mb-6">Powered by $DRGN Token</h4>
+    <p class="max-w-2xl mx-auto text-gray-300 px-6">
+      Experience the full potential of our revolutionary ecosystem through the $DRGN token — your premium gateway to exclusive features,
+      advanced analytics, insider insights, and community governance participation.
+    </p>
+    <a href="https://t.me/DRGN_Portal" target="_blank" class="mt-8 inline-block bg-yellow-500 hover:bg-yellow-600 text-black font-semibold px-6 py-3 rounded-lg shadow-lg transition hover:shadow-yellow-400/50">Access $DRGN Portal</a>
+  </section>
+
+  <!-- Footer -->
+  <footer class="bg-black/90 py-12 mt-auto">
+    <div class="text-center mb-6">
+      <h3 class="text-lg font-semibold gold-gradient mb-3">Join the Dragon Community</h3>
+      <div class="flex justify-center flex-wrap gap-6">
+        <a href="https://t.me/Dragonstrend" target="_blank"><img src="https://cdn-icons-png.flaticon.com/512/2111/2111646.png" class="w-9 h-9 social-icon"></a>
+        <a href="https://x.com/Dragonstrend" target="_blank"><img src="https://cdn-icons-png.flaticon.com/512/5968/5968830.png" class="w-9 h-9 social-icon"></a>
+        <a href="https://discord.gg/KRJeBMS9nx" target="_blank"><img src="https://cdn-icons-png.flaticon.com/512/5968/5968756.png" class="w-9 h-9 social-icon"></a>
+        <a href="https://www.youtube.com/@DragonsTrending" target="_blank"><img src="https://cdn-icons-png.flaticon.com/512/1384/1384060.png" class="w-9 h-9 social-icon"></a>
+        <a href="https://linktr.ee/dragonstrend" target="_blank"><img src="https://cdn-icons-png.flaticon.com/512/4926/4926586.png" class="w-9 h-9 social-icon"></a>
+      </div>
+    </div>
+    <p class="text-center text-gray-400 text-sm">© 2025 Dragons Trend. All rights reserved.</p>
+  </footer>
+
+</body>
+</html>
